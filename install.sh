@@ -72,13 +72,13 @@ case $choice in
 
         echo -e "${BLUE}Generating secrets and configuration...${NC}"
         
-        # Create .env
+        # Create .env (Updated with METRICS_USER)
         cat <<EOF > .env
 FRONT_END_DOMAIN=${DOMAIN}
 SUB_PUBLIC_DOMAIN=${DOMAIN}/api/sub
 JWT_AUTH_SECRET=$(openssl rand -hex 64)
 JWT_API_TOKENS_SECRET=$(openssl rand -hex 64)
-METRICS_USER=admin       # <--- این خط جدید اضافه شد
+METRICS_USER=admin
 METRICS_PASS=$(openssl rand -hex 64)
 WEBHOOK_SECRET_HEADER=$(openssl rand -hex 64)
 POSTGRES_USER=postgres
@@ -177,9 +177,8 @@ EOF
         
         echo -e "${YELLOW}INSTRUCTIONS:${NC}"
         echo "1. Go to your Panel > Nodes > Create Node."
-        echo "2. Select 'Docker' type."
-        echo "3. Copy the 'docker-compose.yml' content shown in the panel."
-        echo "4. I will open a text editor now. PASTE that content inside and save (Ctrl+X, Y, Enter)."
+        echo "2. Copy the 'docker-compose.yml' content shown in the panel."
+        echo "3. I will open a text editor now. PASTE that content inside and save (Ctrl+X, Y, Enter)."
         
         read -p "Press Enter to open editor..."
         
